@@ -7,26 +7,48 @@ import java.util.Date;
 import javax.validation.constraints.NotNull;
 
 /**
- * <b>功能：</b>TS_ANNOUNCE AnnounceEOEntity<br>
- * <b>作者：</b>code generator<br>
- * <b>日期：</b> 2018-03-22 <br>
- * <b>版权所有：<b>版权归北京卡达克数据技术中心所有。<br>
- */
+ * <b>功能:</b>TS_ANNOUCNE(公告通知表) entity class
+ * 
+ * @author LiuEnYuan
+ * @author SunYiChuan
+ * @version 2.0.0
+ **/
 public class AnnounceEO extends BaseEntity {
 
+	// 通告记录是否删除标志
 	private Integer deleteflag;
+
+	// 通告记录更新时间
 	@org.springframework.format.annotation.DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date updatetime;
+
 	@org.springframework.format.annotation.DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@NotNull(message = "创建时间不能为空")
 	private Date createtime;
+
+	@NotNull(message = "通告创建者不能为空")
 	private String announcecreator;
+
+	@NotNull(message = "发布状态不能为空")
 	private Integer state;
-	@org.springframework.format.annotation.DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+
+	@NotNull(message = "到期时间不能为空")
+	@org.springframework.format.annotation.DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Date expriytime;
+
+	@NotNull(message = "通告内容不能为空")
 	private String content;
+
+	@NotNull(message = "通告标题不能为空")
 	private String title;
+
+	@NotNull(message = "通告主键不能为空")
 	private String pkannounce;
+
+	public AnnounceEO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * java字段名转换为原始数据库列名。<b>如果不存在则返回null</b><br>
@@ -200,6 +222,14 @@ public class AnnounceEO extends BaseEntity {
 	/**  **/
 	public void setPkannounce(String pkannounce) {
 		this.pkannounce = pkannounce;
+	}
+
+	@Override
+	public String toString() {
+		super.toString();
+		return "AnnounceEO [deleteflag=" + deleteflag + ", updatetime=" + updatetime + ", createtime=" + createtime
+				+ ", announcecreator=" + announcecreator + ", state=" + state + ", expriytime=" + expriytime
+				+ ", content=" + content + ", title=" + title + ", pkannounce=" + pkannounce + "]";
 	}
 
 }

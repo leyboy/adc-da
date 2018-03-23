@@ -3,21 +3,21 @@
 <mapper namespace="com.adc.da.sys.dao.AnnounceEODao">
 	<!-- Result Map -->
 	<resultMap id="BaseResultMap" type="com.adc.da.sys.entity.AnnounceEO">
-		<id column="pkannounce" property="pkannounce" />
-		<result column="deleteflag" property="deleteflag" javaType="boolean" jdbcType="DECIMAL"/>
-		<result column="Updatetime" property="updatetime" />
-		<result column="createtime" property="createtime" />
-		<result column="announcecreator" property="announcecreator" />
-		<result column="state" property="state" javaType="boolean" jdbcType="DECIMAL"/>
-		<result column="expriytime" property="expriytime" />
-		<result column="content" property="content" />
-		<result column="title" property="title" />
+		<result column="ANNOUNCEID" property="pkannounce" jdbcType="VARCHAR"/>
+		<result column="DeleteFlag" property="deleteflag" javaType="boolean" jdbcType="INTEGER"/>
+		<result column="Updatetime1" property="updatetime" />
+		<result column="Createtime1" property="createtime" />
+		<result column="AnnounceCreator1" property="announcecreator" />
+		<result column="State1" property="state" javaType="INTEGER" jdbcType="DECIMAL"/>
+		<result column="ExpriyTime1" property="expriytime" />
+		<result column="CONTENT1" property="content" />
+		<result column="TITLE1" property="title" />
 	</resultMap>
 
 	<!-- TS_ANNOUNCE table all fields -->
 	<sql id="Base_Column_List">
-		deleteflag, updatetime, createtime, announcecreator, state, expriytime, content,
-		title, pkannounce
+		DeleteFlag1, Updatetime1, Createtime1, AnnounceCreator1, State1, ExpriyTime1, CONTENT1,
+		TITLE1, ANNOUNCEID
 	</sql>
 
 	<!-- 查询条件 -->
@@ -25,49 +25,49 @@
 		where 1=1
 		<trim suffixOverrides=",">
 			<if test="deleteflag != null">
-				and deleteflag ${deleteflagOperator} #{deleteflag}
+				and DeleteFlag1 ${deleteflagOperator} #{deleteflag}
 			</if>
 			<if test="updatetime != null">
-				and updatetime ${updatetimeOperator} #{updatetime}
+				and Updatetime1 ${updatetimeOperator} #{updatetime}
 			</if>
 			<if test="updatetime1 != null">
-				and updatetime &gt;= #{updatetime1}
+				and Updatetime1 &gt;= #{updatetime1}
 			</if>
 			<if test="updatetime2 != null">
-				and updatetime &lt;= #{updatetime2}
+				and Updatetime1 &lt;= #{updatetime2}
 			</if>
 			<if test="createtime != null">
-				and createtime ${createtimeOperator} #{createtime}
+				and Createtime1 ${createtimeOperator} #{createtime}
 			</if>
 			<if test="createtime1 != null">
-				and createtime &gt;= #{createtime1}
+				and Createtime1 &gt;= #{createtime1}
 			</if>
 			<if test="createtime2 != null">
-				and createtime &lt;= #{createtime2}
+				and Createtime1 &lt;= #{createtime2}
 			</if>
 			<if test="announcecreator != null">
-				and announcecreator ${announcecreatorOperator} #{announcecreator}
+				and AnnounceCreator1 ${announcecreatorOperator} #{announcecreator}
 			</if>
 			<if test="state != null">
-				and state ${stateOperator} #{state}
+				and State1 ${stateOperator} #{state}
 			</if>
 			<if test="expriytime != null">
-				and expriytime ${expriytimeOperator} #{expriytime}
+				and ExpriyTime1 ${expriytimeOperator} #{expriytime}
 			</if>
 			<if test="expriytime1 != null">
-				and expriytime &gt;= #{expriytime1}
+				and ExpriyTime1 &gt;= #{expriytime1}
 			</if>
 			<if test="expriytime2 != null">
-				and expriytime &lt;= #{expriytime2}
+				and ExpriyTime1 &lt;= #{expriytime2}
 			</if>
 			<if test="content != null">
-				and content ${contentOperator} #{content}
+				and CONTENT1 ${contentOperator} #{content}
 			</if>
 			<if test="title != null">
-				and title ${titleOperator} #{title}
+				and TITLE1 ${titleOperator} #{title}
 			</if>
 			<if test="pkannounce != null">
-				and pkannounce ${pkannounceOperator} #{pkannounce}
+				and ANNOUNCEID ${pkannounceOperator} #{pkannounce}
 			</if>
 		</trim>
 	</sql>
@@ -88,15 +88,15 @@
 	<insert id="insertSelective" parameterType="com.adc.da.sys.entity.AnnounceEO">
 		insert into TS_ANNOUNCE
 		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="deleteflag != null">deleteflag,</if>
-			<if test="updatetime != null">updatetime,</if>
-			<if test="createtime != null">createtime,</if>
-			<if test="announcecreator != null">announcecreator,</if>
-			<if test="state != null">state,</if>
-			<if test="expriytime != null">expriytime,</if>
-			<if test="content != null">content,</if>
-			<if test="title != null">title,</if>
-			<if test="pkannounce != null">pkannounce,</if>
+			<if test="deleteflag != null">DeleteFlag1,</if>
+			<if test="updatetime != null">Updatetime1,</if>
+			<if test="createtime != null">Createtime1,</if>
+			<if test="announcecreator != null">AnnounceCreator1,</if>
+			<if test="state != null">State1,</if>
+			<if test="expriytime != null">ExpriyTime1,</if>
+			<if test="content != null">CONTENT1,</if>
+			<if test="title != null">TITLE1,</if>
+			<if test="pkannounce != null">ANNOUNCEID,</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="deleteflag != null">#{deleteflag, jdbcType=INTEGER},
