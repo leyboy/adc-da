@@ -1,0 +1,70 @@
+
+//mapper接口映射文件需要修改的地方:
+(1):如果表有是否删除标记,应该将delete类型语句换成update语句,例如:
+<!-- 删除记录 -->
+<update id="deleteByPrimaryKey" parameterType="java.lang.String">
+    update TS_ANNOUNCE set delete_flag =1
+    where pk_announce = #{value}
+</update>
+
+(2):如果表中有select类型语句,需要修改两个地方:
+(2-1):查询条件:
+<!-- 查询条件 -->
+<sql id="Base_Where_Clause">
+    where 1=1 and delete_flag = 0 //修改后
+    <trim suffixOverrides=",">
+        <if test="pkAnnounce != null">
+            and pk_announce ${pkAnnounceOperator} #{pkAnnounce}
+        </if>
+        <if test="title1 != null">
+            and title1 ${title1Operator} #{title1}
+        </if>
+        <if test="content1 != null">
+            and content1 ${content1Operator} #{content1}
+        </if>
+        <if test="expriyTime != null">
+            and expriy_time ${expriyTimeOperator} #{expriyTime}
+        </if>
+        <if test="expriyTime1 != null">
+            and expriy_time &gt;= #{expriyTime1}
+        </if>
+        <if test="expriyTime2 != null">
+            and expriy_time &lt;= #{expriyTime2}
+        </if>
+        <if test="state1 != null">
+            and state1 ${state1Operator} #{state1}
+        </if>
+        <if test="announCecreator != null">
+            and announ_cecreator ${announCecreatorOperator} #{announCecreator}
+        </if>
+        <if test="createTime != null">
+            and create_time ${createTimeOperator} #{createTime}
+        </if>
+        <if test="createTime1 != null">
+            and create_time &gt;= #{createTime1}
+        </if>
+        <if test="createTime2 != null">
+            and create_time &lt;= #{createTime2}
+        </if>
+        <if test="updateTime1 != null">
+            and update_time1 ${updateTime1Operator} #{updateTime1}
+        </if>
+        <if test="updateTime11 != null">
+            and update_time1 &gt;= #{updateTime11}
+        </if>
+        <if test="updateTime12 != null">
+            and update_time1 &lt;= #{updateTime12}
+        </if>
+    </trim>
+</sql>
+(2):修改按主键查询:
+<!-- 根据id查询 TS_ANNOUNCE -->
+<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List"/>
+    from TS_ANNOUNCE
+    where delete_flag = 0 and  pk_announce = #{value}  //修改后
+</select>
+
+
+
